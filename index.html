@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>ProResume Builder - ATS Optimized</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='%232563eb' d='M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm-3 15H8v-2h3v2zm3-4H8v-2h6v2zm3-4H8V7h9v2z'/></svg>" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700&family=Space+Mono:wght@400;700&family=Roboto:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div class="loading-screen" id="loadingScreen">
+      <div class="loader">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+
+    <div class="nav-container">
+      <nav>
+        <div class="logo"><i class="fas fa-file-alt"></i> ProResume</div>
+        <div class="nav-actions">
+          <button class="nav-btn" onclick="showExamples()">
+            <i class="fas fa-lightbulb"></i> Examples
+          </button>
+          <button class="nav-btn" onclick="saveToCloud()">
+            <i class="fas fa-cloud-upload-alt"></i> Save
+          </button>
+          <button class="nav-btn" onclick="exportPDF()">
+            <i class="fas fa-file-pdf"></i> Export
+          </button>
+        </div>
+      </nav>
+    </div>
+
+    <div class="main-container">
+      <div class="progress-container">
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <div class="section-header">
+          <h2 class="section-title">
+            <i class="fas fa-user"></i> Personal Information
+          </h2>
+        </div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="fullName">Full Name *</label>
+            <input
+              type="text"
+              id="fullName"
+              placeholder="Enter Your Full Name"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="jobTitle">Job Title *</label>
+            <input
+              type="text"
+              id="jobTitle"
+              placeholder="Enter Your Job Title"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="email">Email *</label>
+            <input
+              type="email"
+              id="email"
+              placeholder="Enter Your Email ID"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone *</label>
+            <input
+              type="tel"
+              id="phone"
+              placeholder="Enter your Phone Number"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="location">Location</label>
+            <input type="text" id="location" placeholder="Enter Your Address" />
+          </div>
+          <div class="form-group">
+            <label for="linkedin">LinkedIn</label>
+            <input type="url" id="linkedin" placeholder="Enter Your LinkedIn" />
+          </div>
+          <div class="form-group">
+            <label for="website">Website/Portfolio</label>
+            <input
+              type="url"
+              id="website"
+              placeholder="Enter Your Portfolio website"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <div class="section-header">
+          <h2 class="section-title">
+            <i class="fas fa-align-left"></i> Professional Summary
+          </h2>
+        </div>
+        <div class="form-group">
+          <label for="summary">Summary</label>
+          <textarea
+            id="summary"
+            placeholder="Write a brief professional summary highlighting your experience and key achievements..."
+            rows="4"
+          ></textarea>
+        </div>
+        <div
+          class="ats-suggestions"
+          id="summarySuggestions"
+          style="display: none"
+        >
+          <div class="suggestion-item">
+            <i class="fas fa-lightbulb"></i>
+            <span
+              >Use action verbs like 'managed', 'developed', 'led' to make your
+              summary stronger</span
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <div class="section-header">
+          <h2 class="section-title">
+            <i class="fas fa-briefcase"></i> Work Experience
+          </h2>
+        </div>
+        <div id="experienceContainer">
+          <div class="experience-item">
+            <div class="form-grid">
+              <div class="form-group">
+                <label>Job Title</label>
+                <input
+                  type="text"
+                  class="exp-title"
+                  placeholder="Software Engineer"
+                />
+              </div>
+              <div class="form-group">
+                <label>Company</label>
+                <input
+                  type="text"
+                  class="exp-company"
+                  placeholder="Tech Corp"
+                />
+              </div>
+              <div class="form-group">
+                <label>Duration</label>
+                <input
+                  type="text"
+                  class="exp-duration"
+                  placeholder="Jan 2020 - Present"
+                />
+              </div>
+              <div class="form-group">
+                <label>Description</label>
+                <textarea
+                  class="exp-description"
+                  placeholder="Key responsibilities and achievements..."
+                  rows="3"
+                ></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="add-btn" onclick="addExperience()">
+          <i class="fas fa-plus"></i> Add Experience
+        </button>
+      </div>
+
+      <div class="form-section">
+        <div class="section-header">
+          <h2 class="section-title">
+            <i class="fas fa-graduation-cap"></i> Education
+          </h2>
+        </div>
+        <div id="educationContainer">
+          <div class="education-item">
+            <div class="form-grid">
+              <div class="form-group">
+                <label>Degree</label>
+                <input
+                  type="text"
+                  class="edu-degree"
+                  placeholder="Bachelor of Science"
+                />
+              </div>
+              <div class="form-group">
+                <label>Field of Study</label>
+                <input
+                  type="text"
+                  class="edu-field"
+                  placeholder="Computer Science"
+                />
+              </div>
+              <div class="form-group">
+                <label>Institution</label>
+                <input
+                  type="text"
+                  class="edu-institution"
+                  placeholder="University Name"
+                />
+              </div>
+              <div class="form-group">
+                <label>Year</label>
+                <input type="text" class="edu-year" placeholder="2016 - 2020" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="add-btn" onclick="addEducation()">
+          <i class="fas fa-plus"></i> Add Education
+        </button>
+      </div>
+
+      <div class="form-section">
+        <div class="section-header">
+          <h2 class="section-title">
+            <i class="fas fa-certificate"></i> Certifications
+          </h2>
+        </div>
+        <div id="certificationContainer">
+          <div class="certification-item">
+            <div class="form-grid">
+              <div class="form-group">
+                <label>Certification Name</label>
+                <input
+                  type="text"
+                  class="cert-name"
+                  placeholder="PMP, AWS Certified Solutions Architect, etc."
+                  oninput="updatePreview()"
+                />
+              </div>
+              <div class="form-group">
+                <label>Issuing Organization</label>
+                <input
+                  type="text"
+                  class="cert-organization"
+                  placeholder="Project Management Institute, Amazon Web Services"
+                  oninput="updatePreview()"
+                />
+              </div>
+              <div class="form-group">
+                <label>Year / Date</label>
+                <input
+                  type="text"
+                  class="cert-year"
+                  placeholder="2023 or Jan 2023 - Jan 2025"
+                  oninput="updatePreview()"
+                />
+              </div>
+              <div class="form-group">
+                <label>License/Credential ID (Optional)</label>
+                <input
+                  type="text"
+                  class="cert-id"
+                  placeholder="ABC12345"
+                  oninput="updatePreview()"
+                />
+              </div>
+            </div>
+            <button class="add-btn" onclick="removeCertification(this)" style="background: var(--error-color); margin-top: 10px;">
+              <i class="fas fa-trash"></i> Remove
+            </button>
+            <hr style="margin-top: 15px; border-color: var(--bg-tertiary);" />
+          </div>
+        </div>
+        <button class="add-btn" onclick="addCertification()">
+          <i class="fas fa-plus"></i> Add Certification
+        </button>
+      </div>
+      <div class="form-section">
+        <div class="section-header">
+          <h2 class="section-title"><i class="fas fa-tools"></i> Skills</h2>
+        </div>
+        <div class="form-group">
+          <label for="skillInput">Add Skills</label>
+          <input
+            type="text"
+            id="skillInput"
+            placeholder="Type a skill and press Enter"
+          />
+        </div>
+        <div class="skill-container" id="skillContainer"></div>
+        <div
+          class="ats-suggestions"
+          id="skillSuggestions"
+          style="display: none"
+        >
+          <div class="suggestion-item">
+            <i class="fas fa-lightbulb"></i>
+            <span
+              >Add at least 5-8 relevant skills for better ATS optimization</span
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="preview-section template-classic" id="resumePreview">
+        <div class="preview-header">
+          <h1 class="preview-name" id="previewName">Your Name</h1>
+          <p class="preview-title" id="previewTitle">Your Job Title</p>
+          <div class="preview-contact" id="previewContact">
+            <span><i class="fas fa-envelope"></i> email@example.com</span>
+            <span><i class="fas fa-phone"></i> +1 234 567 8900</span>
+            <span><i class="fas fa-map-marker-alt"></i> Location</span>
+          </div>
+        </div>
+        <div
+          class="preview-section-content"
+          id="previewSummary"
+          style="display: none"
+        >
+          <h3 class="preview-section-title">Professional Summary</h3>
+          <p id="previewSummaryText"></p>
+        </div>
+        <div
+          class="preview-section-content"
+          id="previewExperience"
+          style="display: none"
+        >
+          <h3 class="preview-section-title">Work Experience</h3>
+          <div id="previewExperienceList"></div>
+        </div>
+        <div
+          class="preview-section-content"
+          id="previewEducation"
+          style="display: none"
+        >
+          <h3 class="preview-section-title">Education</h3>
+          <div id="previewEducationList"></div>
+        </div>
+
+        <div class="preview-section-content" id="previewCertifications" style="display: none" >
+          <h3 class="preview-section-title">Certifications</h3>
+          <div id="previewCertificationList"></div>
+        </div>
+        <div
+          class="preview-section-content"
+          id="previewSkills"
+          style="display: none"
+        >
+          <h3 class="preview-section-title">Skills</h3>
+          <div id="previewSkillsList"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fab-container">
+      <button class="fab" onclick="showTemplates()">
+        <i class="fas fa-th-large"></i>
+      </button>
+      <button class="fab" onclick="previewResume()">
+        <i class="fas fa-eye"></i>
+      </button>
+      <button class="fab" onclick="generateCoverLetter()">
+        <i class="fas fa-envelope"></i>
+      </button>
+    </div>
+
+    <div class="ats-score" onclick="showATSDetails()">
+      <div class="ats-score-value" id="atsScore">0%</div>
+      <div class="ats-score-label">ATS Score</div>
+    </div>
+
+    <div class="toast-container" id="toastContainer"></div>
+
+    <div class="modal" id="templateModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title">Choose Template</h2>
+          <button class="close-modal" onclick="closeModal('templateModal')">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="template-grid">
+          <div class="template-card selected" onclick="selectTemplate('classic')" >
+            <i class="fas fa-file-alt fa-3x"></i>
+            <p>Classic</p>
+          </div>
+          <div class="template-card" onclick="selectTemplate('modern')">
+            <i class="fas fa-palette fa-3x"></i>
+            <p>Modern</p>
+          </div>
+          <div class="template-card" onclick="selectTemplate('creative')">
+            <i class="fas fa-magic fa-3x"></i>
+            <p>Creative</p>
+          </div>
+          <div class="template-card" onclick="selectTemplate('minimal')">
+            <i class="fas fa-minus fa-3x"></i>
+            <p>Minimal</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal" id="examplesModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title">Load Example Resume</h2>
+          <button class="close-modal" onclick="closeModal('examplesModal')">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="example-grid">
+          <div class="example-card" onclick="loadExample('software-engineer')">
+            <i class="fas fa-code fa-2x"></i>
+            <h3>Software Engineer</h3>
+            <p>Tech industry resume</p>
+          </div>
+          <div class="example-card" onclick="loadExample('marketing-manager')">
+            <i class="fas fa-chart-line fa-2x"></i>
+            <h3>Marketing Manager</h3>
+            <p>Business & marketing</p>
+          </div>
+          <div class="example-card" onclick="loadExample('project-manager')">
+            <i class="fas fa-tasks fa-2x"></i>
+            <h3>Project Manager</h3>
+            <p>Management role</p>
+          </div>
+          <div class="example-card" onclick="loadExample('student')">
+            <i class="fas fa-graduation-cap fa-2x"></i>
+            <h3>Recent Graduate</h3>
+            <p>Entry-level position</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal" id="coverLetterModal">
+      <div class="modal-content" style="max-width: 800px">
+        <div class="modal-header">
+          <h2 class="modal-title">Cover Letter</h2>
+          <button class="close-modal" onclick="closeModal('coverLetterModal')">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="form-group">
+          <label for="companyName">Company Name</label>
+          <input type="text" id="companyName" placeholder="Enter company name" />
+        </div>
+        <div class="form-group">
+          <label for="hiringManager">Hiring Manager Name</label>
+          <input type="text" id="hiringManager" placeholder="Enter hiring manager name" />
+        </div>
+        <div class="form-group">
+          <label for="coverLetterContent">Cover Letter Content</label>
+          <textarea
+            id="coverLetterContent"
+            rows="12"
+            placeholder="Your cover letter will be generated here..."
+          ></textarea>
+        </div>
+        <button class="add-btn" onclick="generateCoverLetterContent()">
+          <i class="fas fa-sync"></i> Generate Cover Letter
+        </button>
+        <button
+          class="add-btn"
+          onclick="exportCoverLetter()"
+          style="background: var(--success-color)"
+        >
+          <i class="fas fa-download"></i> Export Cover Letter
+        </button>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
