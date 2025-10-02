@@ -67,6 +67,7 @@
               id="fullName"
               placeholder="Enter Your Full Name"
               required
+              oninput="updatePreview()"
             />
           </div>
           <div class="form-group">
@@ -76,6 +77,7 @@
               id="jobTitle"
               placeholder="Enter Your Job Title"
               required
+              oninput="updatePreview()"
             />
           </div>
           <div class="form-group">
@@ -85,6 +87,7 @@
               id="email"
               placeholder="Enter Your Email ID"
               required
+              oninput="updatePreview()"
             />
           </div>
           <div class="form-group">
@@ -94,15 +97,16 @@
               id="phone"
               placeholder="Enter your Phone Number"
               required
+              oninput="updatePreview()"
             />
           </div>
           <div class="form-group">
             <label for="location">Location</label>
-            <input type="text" id="location" placeholder="Enter Your Address" />
+            <input type="text" id="location" placeholder="Enter Your Address" oninput="updatePreview()" />
           </div>
           <div class="form-group">
             <label for="linkedin">LinkedIn</label>
-            <input type="url" id="linkedin" placeholder="Enter Your LinkedIn" />
+            <input type="url" id="linkedin" placeholder="Enter Your LinkedIn" oninput="updatePreview()" />
           </div>
           <div class="form-group">
             <label for="website">Website/Portfolio</label>
@@ -110,6 +114,7 @@
               type="url"
               id="website"
               placeholder="Enter Your Portfolio website"
+              oninput="updatePreview()"
             />
           </div>
         </div>
@@ -127,6 +132,7 @@
             id="summary"
             placeholder="Write a brief professional summary highlighting your experience and key achievements..."
             rows="4"
+            oninput="updatePreview()"
           ></textarea>
         </div>
         <div
@@ -154,35 +160,43 @@
           <div class="experience-item">
             <div class="form-grid">
               <div class="form-group">
-                <label>Job Title</label>
+                <label for="exp-title-0">Job Title</label>
                 <input
                   type="text"
+                  id="exp-title-0"
                   class="exp-title"
                   placeholder="Software Engineer"
+                  oninput="updatePreview()"
                 />
               </div>
               <div class="form-group">
-                <label>Company</label>
+                <label for="exp-company-0">Company</label>
                 <input
                   type="text"
+                  id="exp-company-0"
                   class="exp-company"
                   placeholder="Tech Corp"
+                  oninput="updatePreview()"
                 />
               </div>
               <div class="form-group">
-                <label>Duration</label>
+                <label for="exp-duration-0">Duration</label>
                 <input
                   type="text"
+                  id="exp-duration-0"
                   class="exp-duration"
                   placeholder="Jan 2020 - Present"
+                  oninput="updatePreview()"
                 />
               </div>
               <div class="form-group">
-                <label>Description</label>
+                <label for="exp-description-0">Description</label>
                 <textarea
+                  id="exp-description-0"
                   class="exp-description"
                   placeholder="Key responsibilities and achievements..."
                   rows="3"
+                  oninput="updatePreview()"
                 ></textarea>
               </div>
             </div>
@@ -203,32 +217,38 @@
           <div class="education-item">
             <div class="form-grid">
               <div class="form-group">
-                <label>Degree</label>
+                <label for="edu-degree-0">Degree</label>
                 <input
                   type="text"
+                  id="edu-degree-0"
                   class="edu-degree"
                   placeholder="Bachelor of Science"
+                  oninput="updatePreview()"
                 />
               </div>
               <div class="form-group">
-                <label>Field of Study</label>
+                <label for="edu-field-0">Field of Study</label>
                 <input
                   type="text"
+                  id="edu-field-0"
                   class="edu-field"
                   placeholder="Computer Science"
+                  oninput="updatePreview()"
                 />
               </div>
               <div class="form-group">
-                <label>Institution</label>
+                <label for="edu-institution-0">Institution</label>
                 <input
                   type="text"
+                  id="edu-institution-0"
                   class="edu-institution"
                   placeholder="University Name"
+                  oninput="updatePreview()"
                 />
               </div>
               <div class="form-group">
-                <label>Year</label>
-                <input type="text" class="edu-year" placeholder="2016 - 2020" />
+                <label for="edu-year-0">Year</label>
+                <input type="text" id="edu-year-0" class="edu-year" placeholder="2016 - 2020" oninput="updatePreview()" />
               </div>
             </div>
           </div>
@@ -248,43 +268,47 @@
           <div class="certification-item">
             <div class="form-grid">
               <div class="form-group">
-                <label>Certification Name</label>
+                <label for="cert-name-0">Certification Name</label>
                 <input
                   type="text"
+                  id="cert-name-0"
                   class="cert-name"
                   placeholder="PMP, AWS Certified Solutions Architect, etc."
                   oninput="updatePreview()"
                 />
               </div>
               <div class="form-group">
-                <label>Issuing Organization</label>
+                <label for="cert-organization-0">Issuing Organization</label>
                 <input
                   type="text"
+                  id="cert-organization-0"
                   class="cert-organization"
                   placeholder="Project Management Institute, Amazon Web Services"
                   oninput="updatePreview()"
                 />
               </div>
               <div class="form-group">
-                <label>Year / Date</label>
+                <label for="cert-year-0">Year / Date</label>
                 <input
                   type="text"
+                  id="cert-year-0"
                   class="cert-year"
                   placeholder="2023 or Jan 2023 - Jan 2025"
                   oninput="updatePreview()"
                 />
               </div>
               <div class="form-group">
-                <label>License/Credential ID (Optional)</label>
+                <label for="cert-id-0">License/Credential ID (Optional)</label>
                 <input
                   type="text"
+                  id="cert-id-0"
                   class="cert-id"
                   placeholder="ABC12345"
                   oninput="updatePreview()"
                 />
               </div>
             </div>
-            <button class="add-btn" onclick="removeCertification(this)" style="background: var(--error-color); margin-top: 10px;">
+            <button class="add-btn remove-btn" onclick="removeCertification(this)">
               <i class="fas fa-trash"></i> Remove
             </button>
             <hr style="margin-top: 15px; border-color: var(--bg-tertiary);" />
@@ -294,6 +318,7 @@
           <i class="fas fa-plus"></i> Add Certification
         </button>
       </div>
+
       <div class="form-section">
         <div class="section-header">
           <h2 class="section-title"><i class="fas fa-tools"></i> Skills</h2>
@@ -356,10 +381,11 @@
           <div id="previewEducationList"></div>
         </div>
 
-        <div class="preview-section-content" id="previewCertifications" style="display: none" >
+        <div class="preview-section-content" id="previewCertifications" style="display: none">
           <h3 class="preview-section-title">Certifications</h3>
           <div id="previewCertificationList"></div>
         </div>
+
         <div
           class="preview-section-content"
           id="previewSkills"
@@ -372,13 +398,13 @@
     </div>
 
     <div class="fab-container">
-      <button class="fab" onclick="showTemplates()">
+      <button class="fab" onclick="showTemplates()" aria-label="Change template">
         <i class="fas fa-th-large"></i>
       </button>
-      <button class="fab" onclick="previewResume()">
+      <button class="fab" onclick="previewResume()" aria-label="Preview resume">
         <i class="fas fa-eye"></i>
       </button>
-      <button class="fab" onclick="generateCoverLetter()">
+      <button class="fab" onclick="generateCoverLetter()" aria-label="Generate cover letter">
         <i class="fas fa-envelope"></i>
       </button>
     </div>
@@ -394,25 +420,25 @@
       <div class="modal-content">
         <div class="modal-header">
           <h2 class="modal-title">Choose Template</h2>
-          <button class="close-modal" onclick="closeModal('templateModal')">
+          <button class="close-modal" onclick="closeModal('templateModal')" aria-label="Close template modal">
             <i class="fas fa-times"></i>
           </button>
         </div>
         <div class="template-grid">
-          <div class="template-card selected" onclick="selectTemplate('classic')" >
-            <i class="fas fa-file-alt fa-3x"></i>
+          <div class="template-card selected" onclick="selectTemplate('classic')">
+            <i class="fas fa-file-alt fa-3x" aria-hidden="true"></i>
             <p>Classic</p>
           </div>
           <div class="template-card" onclick="selectTemplate('modern')">
-            <i class="fas fa-palette fa-3x"></i>
+            <i class="fas fa-palette fa-3x" aria-hidden="true"></i>
             <p>Modern</p>
           </div>
           <div class="template-card" onclick="selectTemplate('creative')">
-            <i class="fas fa-magic fa-3x"></i>
+            <i class="fas fa-magic fa-3x" aria-hidden="true"></i>
             <p>Creative</p>
           </div>
           <div class="template-card" onclick="selectTemplate('minimal')">
-            <i class="fas fa-minus fa-3x"></i>
+            <i class="fas fa-minus fa-3x" aria-hidden="true"></i>
             <p>Minimal</p>
           </div>
         </div>
@@ -423,28 +449,28 @@
       <div class="modal-content">
         <div class="modal-header">
           <h2 class="modal-title">Load Example Resume</h2>
-          <button class="close-modal" onclick="closeModal('examplesModal')">
+          <button class="close-modal" onclick="closeModal('examplesModal')" aria-label="Close examples modal">
             <i class="fas fa-times"></i>
           </button>
         </div>
         <div class="example-grid">
           <div class="example-card" onclick="loadExample('software-engineer')">
-            <i class="fas fa-code fa-2x"></i>
+            <i class="fas fa-code fa-2x" aria-hidden="true"></i>
             <h3>Software Engineer</h3>
             <p>Tech industry resume</p>
           </div>
           <div class="example-card" onclick="loadExample('marketing-manager')">
-            <i class="fas fa-chart-line fa-2x"></i>
+            <i class="fas fa-chart-line fa-2x" aria-hidden="true"></i>
             <h3>Marketing Manager</h3>
             <p>Business & marketing</p>
           </div>
           <div class="example-card" onclick="loadExample('project-manager')">
-            <i class="fas fa-tasks fa-2x"></i>
+            <i class="fas fa-tasks fa-2x" aria-hidden="true"></i>
             <h3>Project Manager</h3>
             <p>Management role</p>
           </div>
           <div class="example-card" onclick="loadExample('student')">
-            <i class="fas fa-graduation-cap fa-2x"></i>
+            <i class="fas fa-graduation-cap fa-2x" aria-hidden="true"></i>
             <h3>Recent Graduate</h3>
             <p>Entry-level position</p>
           </div>
@@ -456,7 +482,7 @@
       <div class="modal-content" style="max-width: 800px">
         <div class="modal-header">
           <h2 class="modal-title">Cover Letter</h2>
-          <button class="close-modal" onclick="closeModal('coverLetterModal')">
+          <button class="close-modal" onclick="closeModal('coverLetterModal')" aria-label="Close cover letter modal">
             <i class="fas fa-times"></i>
           </button>
         </div>
